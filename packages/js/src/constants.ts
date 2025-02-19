@@ -26,7 +26,7 @@ export const REWARD_MINT = new anchor.web3.PublicKey(
 );
 // TODO: Use the admin key from the Alris Staking program
 export const ADMIN_PUBLIC_KEY = new anchor.web3.PublicKey(
-  "Gtv1Q4FpUtho5L4ZTDZWSUN4dyVVLgB5FFizip7zo8F3"
+  "D77oCHtPGLXABHWLu6MJZ4NNPx68YQArG4qTEaMAXbK8"
 );
 /**
  * @deprecated
