@@ -1,4 +1,10 @@
 import * as anchor from "@coral-xyz/anchor";
+import { BN } from "@coral-xyz/anchor";
+
+export const MIN_DURATION = new BN(1296000); // 15 days
+export const MAX_DURATION = new BN(31536000); // 365 days
+export const BASE_WEIGHT = new BN(1_000_000_000);
+export const MAX_WEIGHT = new BN(4_000_000_000);
 
 export const SCALE_FACTOR_BASE = 1_000_000_000n;
 export const SCALE_FACTOR_BASE_BN = new anchor.BN(1_000_000_000);
@@ -19,10 +25,10 @@ export const ALR_STAKING_PROGRAM_ID = new anchor.web3.PublicKey(
 );
 
 export const ALR_MINT = new anchor.web3.PublicKey(
-  "3wVFzM26EBX3SoPYDd6HCxrBrqQ8Nr8jeAerr1xVn4f4"
+  "FwzpNxnabjZvc8QCnV6qPEBKxqLxSyjobc5Etdgxpump"
 );
 export const REWARD_MINT = new anchor.web3.PublicKey(
-  "3wVFzM26EBX3SoPYDd6HCxrBrqQ8Nr8jeAerr1xVn4f4"
+  "rALRFEd9Tiguv69uoWZrcyLXxnc4nfgeqjmsH4jCguj"
 );
 // TODO: Use the admin key from the Alris Staking program
 export const ADMIN_PUBLIC_KEY = new anchor.web3.PublicKey(
