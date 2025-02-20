@@ -1,5 +1,5 @@
 import { AlrisStakingProgram, MAX_DURATION, MIN_DURATION, MAX_WEIGHT } from "@alris-labs/token-staking"
-import { AnchorProvider, Wallet } from "@coral-xyz/anchor"
+import { AnchorProvider, BN, Wallet } from "@coral-xyz/anchor"
 import { Connection, Keypair } from '@solana/web3.js'
 import fs from 'fs';
 // Load keypair from JSON file
@@ -18,13 +18,12 @@ async function initializeProgram() {
         {commitment: 'confirmed'}
     )
     const program = new AlrisStakingProgram(provider);
-    console.log(await program.getStakePool());
-    const stakePool = await program.initialize(MAX_WEIGHT, MIN_DURATION, MAX_DURATION);
-    console.log(stakePool);
+    const deposit = await program.deposit(new BN(1_000_000), MIN_DURATION);
+    console.log(deposit);
 }
 
 initializeProgram().then(() => {
-    console.log("Program initialized");
+    console.log("Deposit completed");
 }).catch((error) => {
     console.error(error);
 });

@@ -12,6 +12,7 @@ import {
   ALR_STAKING_PROGRAM_ID,
   REWARD_MINT,
 } from "./constants";
+import { StakePool } from "./types";
 
 export class AlrisStakingProgram {
   private program: Program<AlrisStaking>;
@@ -108,13 +109,15 @@ export class AlrisStakingProgram {
       };
     }
   }
-
+  async getStakePool(): Promise<StakePool> {
+    return this.program.account.stakePool.fetch(this.stakePoolPda);
+  }
   async initialize(
     maxWeight: BN,
     minDuration: BN,
     maxDuration: BN
   ): Promise<{
-    stakePool: IdlAccounts<AlrisStaking>["StakePool"];
+    stakePool: IdlAccounts<AlrisStaking>["stakePool"];
     tx_hash: string;
   }> {
     let intialize_stake_pool_ix = await this.program.methods
@@ -160,7 +163,7 @@ export class AlrisStakingProgram {
 
     console.log("tx_hash", tx_hash);
     return {
-      stakePool: await this.program.account.StakePool.fetch(this.stakePoolPda),
+      stakePool: await this.program.account.stakePool.fetch(this.stakePoolPda),
       tx_hash,
     };
   }
@@ -212,8 +215,8 @@ export class AlrisStakingProgram {
     lockupDuration: BN
   ): Promise<{
     tx_hash: string;
-    stakeDepositReceipt: IdlAccounts<AlrisStaking>["StakeDepositReceipt"];
-    stakePool: IdlAccounts<AlrisStaking>["StakePool"];
+    stakeDepositReceipt: IdlAccounts<AlrisStaking>["stakeDepositReceipt"];
+    stakePool: IdlAccounts<AlrisStaking>["stakePool"];
   }> {
     const userALRMintTokenAccount = this.getAta(ALR_MINT, this.wallet);
 
@@ -264,10 +267,10 @@ export class AlrisStakingProgram {
     let tx = await txBuilder.rpc();
     console.log("tx_hash", tx);
     const stakeDepositReceipt =
-      await this.program.account.StakeDepositReceipt.fetch(
+      await this.program.account.stakeDepositReceipt.fetch(
         stakeDepositReceiptPda
       );
-    const stakePool = await this.program.account.StakePool.fetch(
+    const stakePool = await this.program.account.stakePool.fetch(
       this.stakePoolPda
     );
     return {

@@ -19,7 +19,7 @@ pub struct InitializeStakePool<'info> {
     #[account(mut)]
     pub payer: Signer<'info>,
 
-    #[account(constraint = authority.key() == Pubkey::from_str("D77oCHtPGLXABHWLu6MJZ4NNPx68YQArG4qTEaMAXbK8").unwrap() @ErrorCode::InvalidAuthority)]
+    #[account(constraint = authority.key() == Pubkey::from_str("BEs6Lh6NbDVtxt3FPKVkLN9fz22Byk6EvEp4GRUW7mqm").unwrap() @ErrorCode::InvalidAuthority)]
     pub authority: Signer<'info>,
 
     pub mint: Box<Account<'info, Mint>>,

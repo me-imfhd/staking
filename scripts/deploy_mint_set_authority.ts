@@ -2,6 +2,7 @@
 import { Connection, Keypair, PublicKey, } from '@solana/web3.js';
 import {  createMint } from '@solana/spl-token'
 import fs from 'fs';
+import { ADMIN_PUBLIC_KEY } from '@alris-labs/token-staking';
 
 // Load keypair from JSON file
 function loadKeypairFromFile(filePath: string) {
@@ -16,8 +17,7 @@ async function deployMintAndSetAuthority() {
     const wallet = loadKeypairFromFile(`${process.env.HOME}/.config/solana/id.json`);
     // Load the mint keypair from a JSON file
     const mintKeypair = loadKeypairFromFile('../target/deploy/r_alr_mint_keypair.json');
-    const adminPublicKey = new PublicKey('D77oCHtPGLXABHWLu6MJZ4NNPx68YQArG4qTEaMAXbK8');
-    const mint = await createMint(connection, wallet, adminPublicKey, null, 6, mintKeypair);
+    const mint = await createMint(connection, wallet, ADMIN_PUBLIC_KEY, null, 6, mintKeypair);
     console.log('Mint created with public key:', mint);
 }
 

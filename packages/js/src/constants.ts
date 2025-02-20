@@ -25,14 +25,14 @@ export const ALR_STAKING_PROGRAM_ID = new anchor.web3.PublicKey(
 );
 
 export const ALR_MINT = new anchor.web3.PublicKey(
-  "FwzpNxnabjZvc8QCnV6qPEBKxqLxSyjobc5Etdgxpump"
+  "3wVFzM26EBX3SoPYDd6HCxrBrqQ8Nr8jeAerr1xVn4f4"
 );
 export const REWARD_MINT = new anchor.web3.PublicKey(
   "rALRFEd9Tiguv69uoWZrcyLXxnc4nfgeqjmsH4jCguj"
 );
 // TODO: Use the admin key from the Alris Staking program
 export const ADMIN_PUBLIC_KEY = new anchor.web3.PublicKey(
-  "D77oCHtPGLXABHWLu6MJZ4NNPx68YQArG4qTEaMAXbK8"
+  "BEs6Lh6NbDVtxt3FPKVkLN9fz22Byk6EvEp4GRUW7mqm"
 );
 /**
  * @deprecated

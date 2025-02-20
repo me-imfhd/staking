@@ -1,9 +1,9 @@
 {
-  "name": "@alris-labs/token-staking",
-  "version": "0.1.0",
+  "name": "@meimfhd/alris-token-staking",
+  "version": "0.1.0-devnet",
   "description": "Alris staking TS package",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "files": [
     "dist"
   ],
@@ -34,5 +34,15 @@
     "rollup": "^3.29.0",
     "rollup-plugin-typescript2": "^0.35.0",
     "typescript": "^5.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/me-imfhd/staking.git"
+  },
+  "author": "me-imfhd",
+  "types": "./dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/me-imfhd/staking/issues"
+  },
+  "homepage": "https://github.com/me-imfhd/staking#readme"
 }

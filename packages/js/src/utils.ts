@@ -282,7 +282,7 @@ export const fetchStakeReceiptsOfStakersWithinTimeFrame = async (
   );
   const chunkedStakeReceipts = await Promise.all(
     chunkedKeys.map((keys) =>
-      program.account.StakeDepositReceipt.fetchMultiple(keys)
+      program.account.stakeDepositReceipt.fetchMultiple(keys)
     )
   );
 

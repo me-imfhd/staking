@@ -430,7 +430,7 @@ export const _AlrisStakingIDL = {
   ],
   "accounts": [
     {
-      "name": "StakePool",
+      "name": "stakePool",
       "type": {
         "kind": "struct",
         "fields": [
@@ -519,7 +519,7 @@ export const _AlrisStakingIDL = {
       }
     },
     {
-      "name": "StakeDepositReceipt",
+      "name": "stakeDepositReceipt",
       "type": {
         "kind": "struct",
         "fields": [
