@@ -12,7 +12,7 @@ import {
   ALR_STAKING_PROGRAM_ID,
   REWARD_MINT,
 } from "./constants";
-import { StakePool } from "./types";
+import { StakeDepositReceipt, StakePool } from "./types";
 
 export class AlrisStakingProgram {
   private program: Program<AlrisStaking>;
@@ -111,6 +111,18 @@ export class AlrisStakingProgram {
   }
   async getStakePool(): Promise<StakePool> {
     return this.program.account.stakePool.fetch(this.stakePoolPda);
+  }
+  async getStakeDepositReceipt(): Promise<StakeDepositReceipt[]> {
+    let receipts = await this.program.account.stakeDepositReceipt.all([
+      {
+        memcmp: {
+          offset: 8,
+          bytes: this.wallet.toBase58(),
+          encoding: "base58",
+        },
+      },
+    ]);
+    return receipts.map((r) => r.account);
   }
   async initialize(
     maxWeight: BN,
