@@ -34,6 +34,9 @@ export const REWARD_MINT = new anchor.web3.PublicKey(
 export const ADMIN_PUBLIC_KEY = new anchor.web3.PublicKey(
   "BEs6Lh6NbDVtxt3FPKVkLN9fz22Byk6EvEp4GRUW7mqm"
 );
+export const METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
+  "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+);
 /**
  * @deprecated
  * Use `ALR_STAKING_PROGRAM_ID` instead
