@@ -381,7 +381,6 @@ export class AlrisStakingProgram {
   }
   async withdraw(stakeDepositReceipt: web3.PublicKey): Promise<{
     tx_hash: string;
-    stakeDepositReceipt: StakeDepositReceipt;
   }> {
     const tx = await this.program.methods
       .withdraw()
@@ -403,13 +402,15 @@ export class AlrisStakingProgram {
           isWritable: true,
           pubkey: this.rewardVaultPda,
         },
+        {
+          isSigner: false,
+          isWritable: true,
+          pubkey: this.userRewardMintAta,
+        },
       ])
       .rpc();
-    const stakeDepositReceiptData =
-      await this.program.account.stakeDepositReceipt.fetch(stakeDepositReceipt);
     return {
       tx_hash: tx,
-      stakeDepositReceipt: stakeDepositReceiptData,
     };
   }
   async claimRewards(stakeDepositReceipt: web3.PublicKey): Promise<{
@@ -431,6 +432,11 @@ export class AlrisStakingProgram {
           isSigner: false,
           isWritable: true,
           pubkey: this.rewardVaultPda,
+        },
+        {
+          isSigner: false,
+          isWritable: true,
+          pubkey: this.userRewardMintAta,
         },
       ])
       .rpc();
