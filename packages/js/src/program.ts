@@ -12,6 +12,7 @@ import {
   ALR_STAKING_PROGRAM_ID,
   METADATA_PROGRAM_ID,
   REWARD_MINT,
+  SCALE_FACTOR_BASE_SQUARED,
 } from "./constants";
 import {
   StakeDepositReceipt,
@@ -581,6 +582,56 @@ export class AlrisStakingProgram {
       rentEpoch: BigInt(metadataAccount.rentEpoch),
     });
     return metadata;
+  }
+
+  /**
+   * Calculate pending rewards for a given stake deposit receipt
+   * @param stakeDepositReceipt The stake deposit receipt to calculate rewards for
+   * @returns The pending reward amount as a BN
+   */
+  async calculateRewardsPerEffectiveStake(): Promise<BN> {
+    // Fetch the stake pool and deposit receipt data
+    const stakePool = await this.getStakePool();
+    // If there's no total weighted stake, return 0
+    if (stakePool.totalWeightedStake.isZero()) {
+      return new BN(0);
+    }
+    let tokenBalance = new BN((await this.getRewardVaultBalance()).amount);
+    let balanceDiff = tokenBalance.sub(stakePool.rewardPools[0].lastAmount);
+    let scaledBalanceDiff = balanceDiff.mul(new BN(SCALE_FACTOR_BASE_SQUARED));
+    let additionalRewardsPerEffectiveStake = scaledBalanceDiff.div(
+      stakePool.totalWeightedStake
+    );
+    let rewardsPerEffectiveStake =
+      stakePool.rewardPools[0].rewardsPerEffectiveStake;
+    let updatedRewardsPerEffectiveStake = rewardsPerEffectiveStake.add(
+      additionalRewardsPerEffectiveStake
+    );
+    return updatedRewardsPerEffectiveStake;
+  }
+  /**
+   * Calculate the claimable rewards for a given stake deposit receipt
+   * @param stakeDepositReceipt The stake deposit receipt to calculate rewards for
+   * @returns The claimable reward amount as a BN
+   */
+  async getUsersClaimableRewards(
+    stakeDepositReceipt: web3.PublicKey
+  ): Promise<BN> {
+    const stakeDepositReceiptData =
+      await this.program.account.stakeDepositReceipt.fetch(stakeDepositReceipt);
+    const rewardsPerEffectiveStake =
+      await this.calculateRewardsPerEffectiveStake();
+    const claimablePerEffectiveStake = rewardsPerEffectiveStake.sub(
+      stakeDepositReceiptData.claimedAmounts[0]
+    );
+    const claimableRewardsScaled = claimablePerEffectiveStake.mul(
+      stakeDepositReceiptData.effectiveStake
+    );
+    const claimableRewards = claimableRewardsScaled.div(
+      SCALE_FACTOR_BASE_SQUARED
+    );
+
+    return claimableRewards;
   }
 }
 export function displayAccount<
