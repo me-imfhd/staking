@@ -13,7 +13,7 @@ async function updateTokenMeta() {
   let wallet = new Wallet(kp);
 
   let provider = new AnchorProvider(
-    new Connection("https://api.devnet.solana.com", "confirmed"),
+    new Connection("https://api.mainnet-beta.solana.com", "confirmed"),
     wallet,
     { commitment: "confirmed" }
   );

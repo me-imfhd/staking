@@ -25,9 +25,14 @@ export const ALR_STAKING_PROGRAM_ID = new anchor.web3.PublicKey(
   "ALRPAsu4Aqmb8VCVcnjFQo5XF2K8MCDGmTECvZw4YJVY"
 );
 
-export const ALR_MINT = new anchor.web3.PublicKey(
+export const ALR_MINT_DEVNET = new anchor.web3.PublicKey(
   "3wVFzM26EBX3SoPYDd6HCxrBrqQ8Nr8jeAerr1xVn4f4"
 );
+
+export const ALR_MINT = new anchor.web3.PublicKey(
+  "FwzpNxnabjZvc8QCnV6qPEBKxqLxSyjobc5Etdgxpump"
+);
+
 export const REWARD_MINT = new anchor.web3.PublicKey(
   "rALRFEd9Tiguv69uoWZrcyLXxnc4nfgeqjmsH4jCguj"
 );

@@ -1,6 +1,6 @@
 {
   "name": "@meimfhd/alris-token-staking",
-  "version": "0.4.0-devnet",
+  "version": "1.0.0",
   "description": "Alris staking TS package",
   "main": "src/index.ts",
   "module": "src/index.ts",
