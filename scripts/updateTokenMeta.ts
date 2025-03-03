@@ -21,7 +21,7 @@ async function updateTokenMeta() {
   const tx = await program.updateTokenMetadata(
     "Alris LP",
     "LALR",
-    "https://alris.com/alr-lp.jpg"
+    "https://i.imgur.com/AmDhJmi.jpeg"
   );
   console.log(tx);
   const meta = await program.getTokenMetadata();
